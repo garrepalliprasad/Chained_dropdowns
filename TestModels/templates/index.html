@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <h1>Index Page</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Districts Drop Down -->
+        <select name="district" id="district">
+            <option selected disabled>Select District</option>
+            {% for district in districts %}
+            <option value="{{district.id}}">{{district.name}}</option>
+            {% endfor %}
+        </select>
+        <!-- Mandals Drop Down -->
+        <select name="mandal" id="mandal">
+            <option selected disabled>Select Mandal</option>
+        </select>
+        <select name="village" id="village">
+            <option selected disabled>Select Village</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        var mandal_url='{% url "get-mandals" %}'
+        var village_url='{% url "get-villages" %}'
+    </script>
+    <script src="{% static 'js/script.js' %}">     
+    </script>
+</body>
+
+</html>
